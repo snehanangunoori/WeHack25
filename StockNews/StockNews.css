@@ -1,0 +1,130 @@
+/* Stock News CSS - Matching your existing style.css theme */
+
+body {
+    font-family: 'Lora', serif;
+    color: #333;
+    background-color: #012A2D;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #FFF9EB;
+    margin-bottom: 15px;
+    font-size: 5rem;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Search container styles */
+.search-container {
+    display: flex;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+#search-input {
+    flex-grow: 1;
+    padding: 15px;
+    font-size: 1.2rem;
+    border: 1px solid #416562;
+    border-radius: 5px 0 0 5px;
+    font-family: 'Lora', serif;
+    background-color: #FFF9EB;
+}
+
+#search-button {
+    font-family: 'Lora', serif;
+    background-color: #416562;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.2rem;
+    margin: 0; /* Override the margin from the general button style */
+}
+
+#search-button:hover {
+    background-color: #334f4d;
+}
+
+/* News display styling */
+.news-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.news-item {
+    background: #FFF9EB;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.news-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #012A2D;
+}
+
+.news-source {
+    color: #416562;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.news-description {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.news-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #416562;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.news-link:hover {
+    color: #2f4947;
+}
+
+/* Loading and error states */
+.loading {
+    text-align: center;
+    padding: 20px;
+    display: none;
+    color: #FFF9EB;
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid #e74c3c;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 4px;
+    display: none;
+    font-weight: bold;
+}

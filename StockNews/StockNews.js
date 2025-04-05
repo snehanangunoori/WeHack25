@@ -1,5 +1,5 @@
 // Constants
-const NEWS_API_KEY = '6987caceea154109b01379f7aa6bffed'; // Replace with your API key
+const NEWS_API_KEY = '6987caceea154109b01379f7aa6bffed'; 
 const NEWS_API_URL = 'https://newsapi.org/v2/everything';
 
 // DOM Elements
