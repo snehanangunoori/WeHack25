@@ -5,10 +5,10 @@ import numpy as np
 app = Flask(__name__)
 
 model = joblib.load('risk_model.pkl')
-type_encoder = joblib.load('type_encoder.pkl')
+#type_encoder = joblib.load('type_encoder.pkl')
 
 joblib.dump(model, 'risk_model.pkl')
-joblib.dump(type_encoder, 'type_encoder.pkl')
+#joblib.dump(type_encoder, 'type_encoder.pkl')
 
 @app.route('/predict', methods=['POST'])
 def predict():
