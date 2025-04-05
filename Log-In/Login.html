@@ -1,27 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Login/Signup</title>
+  <meta charset="UTF-8" />
+  <title>Login/Signup with Firebase</title>
 </head>
 <body>
-  <h2>Sign Up</h2>
-  <input type="email" id="signup-email" placeholder="Email">
-  <input type="password" id="signup-password" placeholder="Password">
-  <button onclick="handleSignUp()">Sign Up</button>
+  <h2>Firebase Auth Demo</h2>
 
-  <h2>Log In</h2>
-  <input type="email" id="login-email" placeholder="Email">
-  <input type="password" id="login-password" placeholder="Password">
-  <button onclick="handleLogin()">Log In</button>
+  <input type="email" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
 
-  <h2>Log Out</h2>
-  <button onclick="handleLogout()">Log Out</button>
+  <br><br>
+  <button onclick="signUp()">Sign Up</button>
+  <button onclick="logIn()">Log In</button>
+  <button onclick="logOut()">Log Out</button>
+
+  <p id="status"></p>
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js"></script>
-  <!-- Your script -->
-  <script src="script.js"></script>
+
+  <!-- script.js-->
+  <script>
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyDnzGQIwlwpRcs2PJ1HhDp9a6FZof3NN9U",
+  authDomain: "login-6547a.firebaseapp.com",
+  projectId: "login-6547a",
+  storageBucket: "login-6547a.firebasestorage.app",
+  messagingSenderId: "590992873527",
+  appId: "1:590992873527:web:1c6b68030c750e630c47b2"
+};
+
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Sign Up
+    function signUp() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(userCred => {
+          document.getElementById("status").innerText = `Signed up: ${userCred.user.email}`;
+        })
+        .catch(err => {
+          document.getElementById("status").innerText = err.message;
+        });
+    }
+
+    // Log In
+    function logIn() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(userCred => {
+          document.getElementById("status").innerText = `Logged in: ${userCred.user.email}`;
+        })
+        .catch(err => {
+          document.getElementById("status").innerText = err.message;
+        });
+    }
+
+    // Log Out
+    function logOut() {
+      auth.signOut()
+        .then(() => {
+          document.getElementById("status").innerText = "Logged out.";
+        });
+    }
+  </script>
 </body>
 </html>
