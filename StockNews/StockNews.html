@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="StockNews.css">
 </head>
 <body>
+    <div id="navbar"></div>
+    <script>
+        // Load navbar.html into the #navbar div
+        fetch('../navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
+
     <h1>Stock & Company News Search</h1>
     
     <div class="search-container">
