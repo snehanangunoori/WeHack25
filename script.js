@@ -15,38 +15,52 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+
 // Sign Up
-function signUp() {
+window.signUp = function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  auth.createUserWithEmailAndPassword(email, password)
+  createUserWithEmailAndPassword(auth, email, password)
     .then(userCred => {
       document.getElementById("status").innerText = `Signed up: ${userCred.user.email}`;
     })
-    .catch(err => {
-      document.getElementById("status").innerText = err.message;
+    .catch(error => {
+      document.getElementById("status").innerText = `Error: ${error.message}`;
     });
-}
+};
 
 // Log In
-function logIn() {
+window.logIn = function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  auth.signInWithEmailAndPassword(email, password)
+  signInWithEmailAndPassword(auth, email, password)
     .then(userCred => {
       document.getElementById("status").innerText = `Logged in: ${userCred.user.email}`;
     })
-    .catch(err => {
-      document.getElementById("status").innerText = err.message;
+    .catch(error => {
+      document.getElementById("status").innerText = `Error: ${error.message}`;
     });
-}
+};
+
 
 // Log Out
-function logOut() {
-  auth.signOut()
+window.logOut = function () {
+  signOut(auth)
     .then(() => {
-      document.getElementById("status").innerText = "Logged out.";
+      document.getElementById("status").innerText = "Logged out successfully.";
+    })
+    .catch(error => {
+      document.getElementById("status").innerText = `Error: ${error.message}`;
     });
-}
+};
+
+// Auth state listener
+onAuthStateChanged(auth, user => {
+  if (user) {
+    console.log("User is signed in:", user.email);
+  } else {
+    console.log("User is signed out.");
+  }
+});
