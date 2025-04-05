@@ -3,15 +3,15 @@ const NEWS_API_KEY = '6987caceea154109b01379f7aa6bffed';
 const NEWS_API_URL = 'https://newsapi.org/v2/everything';
 
 // DOM Elements
-const searchInput = document.getElementById('search-input');
-const searchButton = document.getElementById('search-button');
-const newsContainer = document.getElementById('news-container');
-const loadingIndicator = document.getElementById('loading');
+const inputSearch = document.getElementById('search-input');
+const buttonSearch = document.getElementById('search-button');
+const containNews = document.getElementById('news-container');
+const indicatorLoader = document.getElementById('loading');
 const errorMessage = document.getElementById('error-message');
 
 // Add event listeners
-searchButton.addEventListener('click', fetchNews);
-searchInput.addEventListener('keypress', function(e) {
+buttonSearch.addEventListener('click', fetchNews);
+inputSearch.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         fetchNews();
     }
@@ -19,7 +19,7 @@ searchInput.addEventListener('keypress', function(e) {
 
 // Fetch news function
 async function fetchNews() {
-    const query = searchInput.value.trim();
+    const query = inputSearch.value.trim();
     
     if (!query) {
         showError('Please enter a stock symbol or company name');
@@ -27,8 +27,8 @@ async function fetchNews() {
     }
     
     // Show loading indicator
-    loadingIndicator.style.display = 'block';
-    newsContainer.innerHTML = '';
+    indicatorLoader.style.display = 'block';
+    containNews.innerHTML = '';
     errorMessage.style.display = 'none';
     
     try {
@@ -49,14 +49,14 @@ async function fetchNews() {
         showError(`Error fetching news: ${error.message}`);
     } finally {
         // Hide loading indicator
-        loadingIndicator.style.display = 'none';
+        indicatorLoader.style.display = 'none';
     }
 }
 
 // Display news function
 function displayNews(articles) {
     // Clear previous results
-    newsContainer.innerHTML = '';
+    containNews.innerHTML = '';
     
     if (!articles || articles.length === 0) {
         showError('No news found for this query');
@@ -78,7 +78,7 @@ function displayNews(articles) {
             <a href="${article.url}" target="_blank" class="news-link">Read full article</a>
         `;
         
-        newsContainer.appendChild(newsItem);
+        containNews.appendChild(newsItem);
     });
 }
 
