@@ -12,7 +12,7 @@
         }
         .navbar {
             display: flex;
-            justify-content: center; /* Center the content horizontally */
+            justify-content: space-evenly; /* Center the content horizontally */
             align-items: center;
             background-color: #333;
             padding: 10px 20px;
@@ -20,6 +20,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            flex-grow: 1;
         }
         .navbar a {
             color: white;
@@ -37,7 +38,8 @@
         }
         .navbar .menu {
             display: flex;
-            gap: 10px;
+            justify-content: space-evenly; /* Ensure equal spacing between links */
+            flex-grow: 1; /* Allow the menu to take up available space */
         }
     </style>
 </head>
