@@ -1,39 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Risk Classifier</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Estate Risk Checker</title>
 </head>
 
 <body>
-    <h2>Investment Risk Checker</h2>
-    <form id="riskForm">
-        Type: <input name="type" value="stock"><br>
-        Return Rate: <input name="return_rate" value="0.1"><br>
-        Years: <input name="years" value="5"><br>
-        Has History? (yes/no): <input name="history" value="yes"><br>
-        <button type="submit">Check Risk</button>
-    </form>
-    <div id="result"></div>
+    <h1>Real-Estate Risk Checker</h1>
 
-    <script>
-        document.getElementById('riskForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const data = {
-                investment_type: e.target.type.value,
-                return_rate: e.target.return_rate.value,
-                years: e.target.years.value,
-                has_history: e.target.history.value
-            };
-            const res = await fetch('/predict', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            const result = await res.json();
-            document.getElementById('result').innerText = "Risk Level: " + result.prediction;
-        };
-    </script>
+    <form id="prediction-form">
+        <label for="return_rate">Return Rate:</label>
+        <input type="number" id="return_rate" name="return_rate" required><br><br>
+
+        <label for="years_held">Years Held:</label>
+        <input type="number" id="years_held" name="years_held" required><br><br>
+
+        <label for="has_history">Has History (1 for Yes, 0 for No):</label>
+        <input type="number" id="has_history" name="has_history" required><br><br>
+
+        <label for="location_score">Location Score:</label>
+        <input type="number" id="location_score" name="location_score" required><br><br>
+
+        <label for="vacancy_rate">Vacancy Rate:</label>
+        <input type="number" id="vacancy_rate" name="vacancy_rate" required><br><br>
+
+        <label for="maintenance_cost_pct">Maintenance Cost Percentage:</label>
+        <input type="number" id="maintenance_cost_pct" name="maintenance_cost_pct" required><br><br>
+
+        <label for="risk_label">Risk Label:</label>
+        <input type="number" id="risk_label" name="risk_label" required><br><br>
+
+        <button type="submit">Check Safety</button>
+    </form>
+        
+    <h2>Prediction Result: <span id="result"></span></h2>
+
 </body>
 
 </html>
