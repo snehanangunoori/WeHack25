@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Investibestie</title>
-  <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investibestie</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
 </head>
 <body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0;">
-    <h1>Investibestie</h1>
-    <button onclick="location.href='searchbar.html'"><h2>Find Your Risks Today!</h2></button>
+        <div id="navbar"></div> <!-- Placeholder for the navbar -->
+
+        <h1>Investibestie</h1>
+        <button onclick="location.href='searchbar.html'"><h2>Find Your Risks Today!</h2></button>
+
+        <script>
+            // Load navbar.html into the #navbar div
+            fetch('navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+        </script>
 </body>
 </html>
