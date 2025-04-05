@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock News Search</title>
+    <link rel="stylesheet" href="StockNews.css">
+</head>
+<body>
+    <h1>Stock & Company News Search</h1>
+    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Enter stock symbol or company name (e.g., AAPL, Tesla)">
+        <button id="search-button">Search</button>
+    </div>
+    
+    <div class="loading" id="loading">Loading news...</div>
+    <div class="error" id="error-message"></div>
+    
+    <div class="news-container" id="news-container"></div>
+
+    <script src="StockNews.js"></script>
+</body>
+</html>

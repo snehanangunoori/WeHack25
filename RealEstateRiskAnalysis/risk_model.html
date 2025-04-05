@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Risk Classifier</title>
+</head>
+
+<body>
+    <h2>Investment Risk Checker</h2>
+    <form id="riskForm">
+        Type: <input name="type" value="stock"><br>
+        Return Rate: <input name="return_rate" value="0.1"><br>
+        Years: <input name="years" value="5"><br>
+        Has History? (yes/no): <input name="history" value="yes"><br>
+        <button type="submit">Check Risk</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('riskForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const data = {
+                investment_type: e.target.type.value,
+                return_rate: e.target.return_rate.value,
+                years: e.target.years.value,
+                has_history: e.target.history.value
+            };
+            const res = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            document.getElementById('result').innerText = "Risk Level: " + result.prediction;
+        };
+    </script>
+</body>
+
+</html>
