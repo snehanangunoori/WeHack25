@@ -23,7 +23,7 @@ window.signUp = function () {
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCred => {
-      document.getElementById("status").innerText = `Signed up: ${userCred.user.email}`;
+      document.getElementById("status").innerText = `Signed up!`;
     })
     .catch(error => {
       document.getElementById("status").innerText = `Error: ${error.message}`;
@@ -36,13 +36,15 @@ window.logIn = function () {
   const password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(userCred => {
-      document.getElementById("status").innerText = `Logged in: ${userCred.user.email}`;
+    .then(userCred => {      
+      // Redirect to the dashboard page after successful login
+      window.location.href = '../dashboard.html';
     })
     .catch(error => {
       document.getElementById("status").innerText = `Error: ${error.message}`;
     });
 };
+
 
 
 // Log Out
