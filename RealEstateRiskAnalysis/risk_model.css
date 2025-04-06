@@ -91,3 +91,9 @@ footer a {
 footer a:hover {
     color: #416562;
 }
+
+#result {
+    font-size: 2rem;
+    color: white;
+    margin-top: 20px;
+}

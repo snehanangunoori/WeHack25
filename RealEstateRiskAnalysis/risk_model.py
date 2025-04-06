@@ -1,16 +1,13 @@
-# Option A
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import pickle
+import joblib
 
 app = Flask(__name__)
 CORS(app)
 
 
 # Load the model once at startup
-with open('risk_model.pkl', 'rb') as f:
-    model = pickle.load(f)
-
+model = joblib.load('risk_model.pkl')
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
@@ -25,7 +22,7 @@ def predict():
     ]
 
     prediction = model.predict([features])[0]
-    return jsonify({'prediction': prediction})
+    return jsonify({'prediction': int(prediction)})
 
 
 if __name__ == '__main__':
