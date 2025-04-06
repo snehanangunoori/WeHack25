@@ -6,16 +6,31 @@
   <link rel="stylesheet" href="./Auth.css" />
 </head>
 <body>
-  <h2>Sign Up</h2>
+  <h2>Welcome to InvestiBestie!</h2>
+  <h3>Please fill the fields to sign Up</h3>
 
-  <input type="email" id="email" placeholder="Email" />
-  <input type="password" id="password" placeholder="Password" />
-  <br><br>
-  <button onclick="signUp()">Sign Up</button>
+  <form>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <input type="text" id="company" placeholder="Company" required />
+    
+    <br><br>
+    <button type="submit">Sign Up</button>
+  </form>
 
   <p id="status"></p>
 
-  
+  <script>
+    document.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const companyName = document.getElementById('company').value;
+      localStorage.setItem('companyName', companyName);
+
+      // Assuming signUp() is defined in script.js
+      signUp();
+    });
+  </script>
+
   <script type="module" src="../script.js"></script>
 </body>
 </html>
