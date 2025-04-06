@@ -23,106 +23,95 @@
             })
             .catch(error => console.error('Error loading navbar:', error));
         
-            const canvas = document.getElementById('stockGraph');
-const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById('stockGraph');
+        const ctx = canvas.getContext('2d');
 
-// Set canvas size
-canvas.width = window.innerWidth;
-canvas.height = 200;
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = 200;
 
-// Create two separate sets of points that will overlap
-const totalPoints = 100;
-const pointSets = [[], []];
-const speed = 2;
-const spacing = canvas.width / totalPoints;
+        // Create two separate sets of points that will overlap
+        const totalPoints = 100;
+        const pointSets = [[], []];
+        const speed = 2;
+        const spacing = canvas.width / totalPoints;
 
-// Initialize first set of points spanning the entire canvas
-for (let i = 0; i < totalPoints; i++) {
-    pointSets[0].push({
-        x: i * spacing,
-        y: canvas.height/2 + (Math.random() * canvas.height * 0.7 - canvas.height * 0.35)
-    });
-}
+        // Initialize first set of points spanning the entire canvas
+        for (let i = 0; i < totalPoints; i++) {
+            pointSets[0].push({
+                x: i * spacing,
+                y: canvas.height / 2 + (Math.random() * canvas.height * 0.7 - canvas.height * 0.35)
+            });
+        }
 
-// Initialize second set of points off-screen to the right
-for (let i = 0; i < totalPoints; i++) {
-    pointSets[1].push({
-        x: canvas.width + i * spacing,
-        y: canvas.height/2 + (Math.random() * canvas.height * 0.7 - canvas.height * 0.35)
-    });
-}
+        // Initialize second set of points off-screen to the right
+        for (let i = 0; i < totalPoints; i++) {
+            pointSets[1].push({
+                x: canvas.width + i * spacing,
+                y: canvas.height / 2 + (Math.random() * canvas.height * 0.7 - canvas.height * 0.35)
+            });
+        }
 
-// Draw the graph with both sets of points
-function drawGraph() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw a horizontal centerline
-    ctx.beginPath();
-    ctx.moveTo(0, canvas.height/2);
-    ctx.lineTo(canvas.width, canvas.height/2);
-    ctx.strokeStyle = 'rgba(65, 101, 98, 0.3)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    
-    // Draw each set of points as a separate path
-    pointSets.forEach(points => {
-        // First, filter only visible points
-        const visiblePoints = points.filter(p => p.x >= 0 && p.x <= canvas.width);
-        
-        if (visiblePoints.length > 1) {
-            ctx.beginPath();
-            ctx.moveTo(visiblePoints[0].x, visiblePoints[0].y);
-            
-            for (let i = 1; i < visiblePoints.length; i++) {
-                ctx.lineTo(visiblePoints[i].x, visiblePoints[i].y);
+        // Draw the graph with both sets of points
+        function drawGraph() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw each set of points as a separate path
+            pointSets.forEach(points => {
+                // First, filter only visible points
+                const visiblePoints = points.filter(p => p.x >= 0 && p.x <= canvas.width);
+
+                if (visiblePoints.length > 1) {
+                    ctx.beginPath();
+                    ctx.moveTo(visiblePoints[0].x, visiblePoints[0].y);
+
+                    for (let i = 1; i < visiblePoints.length; i++) {
+                        ctx.lineTo(visiblePoints[i].x, visiblePoints[i].y);
+                    }
+
+                    ctx.strokeStyle = '#416562';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            });
+        }
+
+        // Update point positions
+        function updateGraph() {
+            // Move all points left
+            pointSets.forEach(points => {
+                points.forEach(point => {
+                    point.x -= speed;
+                });
+            });
+
+            // If the first set has moved completely off-screen
+            if (pointSets[0][pointSets[0].length - 1].x < 0) {
+                // Move it to the right of the second set
+                for (let i = 0; i < totalPoints; i++) {
+                    pointSets[0][i].x = pointSets[1][totalPoints - 1].x + spacing * (i + 1);
+                    pointSets[0][i].y = canvas.height / 2 + (Math.random() * canvas.height * 0.7 - canvas.height * 0.35);
+                }
             }
-            
-            ctx.strokeStyle = '#416562';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+
+            // If the second set has moved completely off-screen
+            if (pointSets[1][pointSets[1].length - 1].x < 0) {
+                // Move it to the right of the first set
+                for (let i = 0; i < totalPoints; i++) {
+                    pointSets[1][i].x = pointSets[0][totalPoints - 1].x + spacing * (i + 1);
+                    pointSets[1][i].y = canvas.height / 2 + (Math.random() * canvas.height * 0.7 - canvas.height * 0.35);
+                }
+            }
         }
-    });
-}
 
-// Update point positions
-function updateGraph() {
-    // Move all points left
-    pointSets.forEach(points => {
-        points.forEach(point => {
-            point.x -= speed;
-        });
-    });
-    
-    // If the first set has moved completely off-screen
-    if (pointSets[0][pointSets[0].length - 1].x < 0) {
-        // Move it to the right of the second set
-        for (let i = 0; i < totalPoints; i++) {
-            pointSets[0][i].x = pointSets[1][totalPoints - 1].x + spacing * (i + 1);
-            pointSets[0][i].y = canvas.height/2 + (Math.random() * canvas.height * 0.7 - canvas.height * 0.35);
+        function animate() {
+            updateGraph();
+            drawGraph();
+            requestAnimationFrame(animate);
         }
-    }
-    
-    // If the second set has moved completely off-screen
-    if (pointSets[1][pointSets[1].length - 1].x < 0) {
-        // Move it to the right of the first set
-        for (let i = 0; i < totalPoints; i++) {
-            pointSets[1][i].x = pointSets[0][totalPoints - 1].x + spacing * (i + 1);
-            pointSets[1][i].y = canvas.height/2 + (Math.random() * canvas.height * 0.7 - canvas.height * 0.35);
-        }
-    }
-}
 
-function animate() {
-    updateGraph();
-    drawGraph();
-    requestAnimationFrame(animate);
-}
-
-// Start animation
-animate();
-
-        
-        
+        // Start animation
+        animate();
     </script>
 
     <style>
