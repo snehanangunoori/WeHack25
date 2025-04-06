@@ -12,31 +12,47 @@
     <h1>Real-Estate Risk Checker</h1>
 
     <form id="prediction-form">
-        <label for="return_rate">Return Rate:</label>
-        <input type="number" id="return_rate" name="return_rate" required><br><br>
-
+        <label for="return_rate">Return Rate (%):</label>
+        <input id="return_rate" type="number" step="any" value="0.1" required>
         <label for="years_held">Years Held:</label>
-        <input type="number" id="years_held" name="years_held" required><br><br>
-
-        <label for="has_history">Has History (1 for Yes, 0 for No):</label>
-        <input type="number" id="has_history" name="has_history" required><br><br>
-
-        <label for="location_score">Location Score:</label>
-        <input type="number" id="location_score" name="location_score" required><br><br>
-
-        <label for="vacancy_rate">Vacancy Rate:</label>
-        <input type="number" id="vacancy_rate" name="vacancy_rate" required><br><br>
-
-        <label for="maintenance_cost_pct">Maintenance Cost Percentage:</label>
-        <input type="number" id="maintenance_cost_pct" name="maintenance_cost_pct" required><br><br>
-
-        <label for="risk_label">Risk Label:</label>
-        <input type="number" id="risk_label" name="risk_label" required><br><br>
-
-        <button type="submit">Check Safety</button>
+        <input id="years_held" type="number" value="5" required>
+        <label for="has_history">Has History (0/1):</label>
+        <input id="has_history" type="number" value="1" required>
+        <label for="location_score">Location Score (0-1):</label>
+        <input id="location_score" type="number" step="any" required>
+        <label for="vacancy_rate">Vacancy Rate (%):</label>
+        <input id="vacancy_rate" type="number" step="any" value="0.05" required>
+        <label for="maintenance_cost_pct">Maintenance Cost (%):</label>
+        <input id="maintenance_cost_pct" type="number" step="any" value="0.02" required>
+        <button type="submit">Predict</button>
     </form>
-        
-    <h2>Prediction Result: <span id="result"></span></h2>
+    
+    <div id="result"></div>
+    
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const data = {
+                return_rate: parseFloat(document.getElementById('return_rate').value),
+                years_held: parseInt(document.getElementById('years_held').value),
+                has_history: parseInt(document.getElementById('has_history').value),
+                location_score: parseFloat(document.getElementById('location_score').value),
+                vacancy_rate: parseFloat(document.getElementById('vacancy_rate').value),
+                maintenance_cost_pct: parseFloat(document.getElementById('maintenance_cost_pct').value)
+            };
+
+            const response = await fetch('http://localhost:5000/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = 'Prediction: ' + result.prediction;
+        });
+    </script>
+
 
 </body>
 

@@ -1,27 +1,32 @@
+# Option A
 from flask import Flask, request, jsonify
-import joblib
-import numpy as np
+from flask_cors import CORS
+import pickle
 
 app = Flask(__name__)
+CORS(app)
 
-model = joblib.load('risk_model.pkl')
-#type_encoder = joblib.load('type_encoder.pkl')
 
-joblib.dump(model, 'risk_model.pkl')
-#joblib.dump(type_encoder, 'type_encoder.pkl')
+# Load the model once at startup
+with open('risk_model.pkl', 'rb') as f:
+    model = pickle.load(f)
 
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
-    investment_type = type_encoder.transform([data['investment_type']])[0]
-    return_rate = float(data['return_rate'])
-    years = int(data['years'])
-    has_history = 1 if data['has_history'] == 'yes' else 0
 
-    features = np.array([[investment_type, return_rate, years, has_history]])
-    pred = model.predict(features)[0]
-    label = 'risky' if pred == 1 else 'safe'
-    return jsonify({'prediction': label})
+    features = [
+        data['return_rate'],
+        data['years_held'],
+        data['has_history'],
+        data['location_score'],
+        data['vacancy_rate'],
+        data['maintenance_cost_pct']
+    ]
+
+    prediction = model.predict([features])[0]
+    return jsonify({'prediction': prediction})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
