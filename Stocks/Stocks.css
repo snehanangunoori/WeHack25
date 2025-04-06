@@ -27,7 +27,7 @@ body {
     font-family: 'Lora', serif;
     color: #FFF9EB;
     font-size: 1rem;
-    animation: tickerAnimation 10s linear infinite;
+    animation: tickerAnimation 5s linear infinite;
 }
 
 .ticker-row {
