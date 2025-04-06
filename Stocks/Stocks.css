@@ -1,0 +1,57 @@
+body {
+    font-family: 'Lora', serif;
+    color: #333;
+    background-color: #012A2D;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Stock Ticker Styles */
+.stock-ticker-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.2;
+    overflow: hidden;
+}
+
+.stock-ticker {
+    position: absolute;
+    width: 200%;
+    white-space: nowrap;
+    font-family: 'Lora', serif;
+    color: #FFF9EB;
+    font-size: 5rem;
+    animation: tickerAnimation 80s linear infinite;
+}
+
+.ticker-row {
+    margin: 120px 0;
+}
+
+.ticker-item {
+    display: inline-block;
+    margin: 0 40px;
+}
+
+.stock-up {
+    color: #4caf50;
+}
+
+.stock-down {
+    color: #f44336;
+}
+
+@keyframes tickerAnimation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
