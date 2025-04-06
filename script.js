@@ -24,6 +24,7 @@ window.signUp = function () {
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCred => {
       document.getElementById("status").innerText = `Signed up!`;
+      window.location.href = "./Login.html";
     })
     .catch(error => {
       document.getElementById("status").innerText = `Error: ${error.message}`;
