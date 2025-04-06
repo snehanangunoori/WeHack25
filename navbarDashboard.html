@@ -8,11 +8,11 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            padding-top: 60px; /* Prevent content from being hidden under the navbar */
+            padding-top: 60px;
         }
         .navbar {
             display: flex;
-            justify-content: space-evenly; /* Center the content horizontally */
+            justify-content: space-between;
             align-items: center;
             background-color: #416562;
             padding: 10px 20px;
@@ -20,7 +20,10 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            flex-grow: 1;
+        }
+        .menu {
+            display: flex;
+            gap: 20px;
         }
         .navbar a {
             font-family: Georgia, 'Times New Roman', Times, serif;
@@ -32,19 +35,52 @@
             background-color: #314d4a;
             border-radius: 4px;
         }
-        .navbar .menu {
-            display: flex;
-            justify-content: space-evenly; /* Ensure equal spacing between links */
-            flex-grow: 1; /* Allow the menu to take up available space */
+        .profile {
+            position: relative;
+            display: inline-block;
+        }
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #FFF9EB;
+            cursor: pointer;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        .dropdown a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+        .profile:hover .dropdown {
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="navbar">
         <div class="menu">
-            <a href ="/RealEstateRiskAnalysis/risk_model.html">Real-Estate Risk Checker</a>
-            <a href ="/StockNews/StockNews.html">Stock News</a>
-            <a href ="/Log-In/LogOut.html">Log Out</a>
+            <a href="/RealEstateRiskAnalysis/risk_model.html">Real-Estate Risk Checker</a>
+            <a href="/StockNews/StockNews.html">Stock News</a>
+        </div>
+        <div class="profile">
+            <div class="profile-icon"></div>
+            <div class="dropdown">
+                <a href="../index.html">Log out</a>
+            </div>
         </div>
     </div>
 </body>
