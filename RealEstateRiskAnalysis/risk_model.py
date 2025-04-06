@@ -20,9 +20,18 @@ def predict():
         data['vacancy_rate'],
         data['maintenance_cost_pct']
     ]
-
+    
     prediction = model.predict([features])[0]
-    return jsonify({'prediction': int(prediction)})
+    probability = model.predict_proba([features])[0][int(prediction)]
+
+    return jsonify({
+        'prediction': int(prediction),
+        'probability': round(float(probability), 2)
+    })
+
+
+    # prediction = model.predict([features])[0]
+    # return jsonify({'prediction': int(prediction)})
 
 
 if __name__ == '__main__':
