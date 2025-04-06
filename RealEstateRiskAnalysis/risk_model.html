@@ -9,6 +9,16 @@
 </head>
 
 <body>
+    <div id="navbar"></div>
+    <script>
+        // Load navbar.html into the #navbar div
+        fetch('../navbarDashboard.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
     <h1>Real-Estate Risk Checker</h1>
 
     <form id="prediction-form">
@@ -49,7 +59,12 @@
             });
 
             const result = await response.json();
-            document.getElementById('result').innerText = 'Prediction: ' + result.prediction;
+            if (result.prediction === 0){
+                document.getElementById('result').innerText = 'Prediction: Safe Investment 😇';
+            }
+            else if (result.prediction === 1){
+                document.getElementById('result').innerText = 'Prediction: Risky Investment 😬';
+            }
         });
     </script>
 
