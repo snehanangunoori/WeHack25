@@ -59,12 +59,29 @@
             });
 
             const result = await response.json();
+            const prob = result.probability;
+
+            let message = '';
+
             if (result.prediction === 0) {
-                document.getElementById('result').innerText = 'Prediction: Safe Investment 😇';
+                if (prob > 0.85) {
+                    message = `Prediction: Very Safe Investment 🏡`;
+                } else if (prob > 0.6) {
+                    message = `Prediction: Safe Investment 😇`;
+                } else {
+                    message = `Prediction: Slightly Safe Investment 🤞`;
+                }
+            } else if (result.prediction === 1) {
+                if (prob > 0.85) {
+                    message = `Prediction: Very Risky Investment ⚠️`;
+                } else if (prob > 0.6) {
+                    message = `Prediction: Risky Investment 😬`;
+                } else {
+                    message = `Prediction: Slightly Risky Investment 🤔`;
+                }
             }
-            else if (result.prediction === 1) {
-                document.getElementById('result').innerText = 'Prediction: Risky Investment 😬';
-            }
+
+            document.getElementById('result').innerText = message;
         });
     </script>
 
