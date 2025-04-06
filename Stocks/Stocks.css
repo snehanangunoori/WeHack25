@@ -13,8 +13,8 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     z-index: 1;
     opacity: 0.2;
     overflow: hidden;
@@ -27,7 +27,7 @@ body {
     font-family: 'Lora', serif;
     color: #FFF9EB;
     font-size: 5rem;
-    animation: tickerAnimation 80s linear infinite;
+    animation: tickerAnimation 10s linear infinite;
 }
 
 .ticker-row {
