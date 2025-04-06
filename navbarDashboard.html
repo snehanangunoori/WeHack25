@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding-top: 60px; /* Prevent content from being hidden under the navbar */
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-evenly; /* Center the content horizontally */
+            align-items: center;
+            background-color: #416562;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            flex-grow: 1;
+        }
+        .navbar a {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: #FFF9EB;
+            text-decoration: none;
+            padding: 8px 16px;
+        }
+        .navbar a:hover {
+            background-color: #314d4a;
+            border-radius: 4px;
+        }
+        .navbar .menu {
+            display: flex;
+            justify-content: space-evenly; /* Ensure equal spacing between links */
+            flex-grow: 1; /* Allow the menu to take up available space */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="menu">
+            <a href ="/RealEstateRiskAnalysis/risk_model.html">Real-Estate Risk Checker</a>
+            <a href ="/StockNews/StockNews.html">Stock News</a>
+            <a href ="/Log-In/LogOut.html">Log Out</a>
+        </div>
+    </div>
+</body>
+</html>
