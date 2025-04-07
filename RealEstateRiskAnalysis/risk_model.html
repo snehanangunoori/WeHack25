@@ -22,20 +22,36 @@
     <h1>Real-Estate Risk Checker</h1>
 
     <form id="prediction-form">
-        <label for="return_rate">Return Rate (%):</label>
-        <input id="return_rate" type="number" step="any" required>
+        <label for="return_rate">Return Rate (0-1):</label>
+        <input id="return_rate" type="number" step="any" value = 0.0907 required>
         <label for="years_held">Years Held:</label>
-        <input id="years_held" type="number" required>
+        <input id="years_held" type="number" value = 17 required>
         <label for="has_history">Has History (0/1):</label>
-        <input id="has_history" type="number" required>
+        <input id="has_history" type="number" value = 1 required>
         <label for="location_score">Location Score (0-1):</label>
-        <input id="location_score" type="number" step="any" required>
-        <label for="vacancy_rate">Vacancy Rate (%):</label>
-        <input id="vacancy_rate" type="number" step="any" required>
-        <label for="maintenance_cost_pct">Maintenance Cost (%):</label>
-        <input id="maintenance_cost_pct" type="number" step="any" required>
+        <input id="location_score" type="number" step="any" value = 0.676 required>
+        <label for="vacancy_rate">Vacancy Rate (0-1):</label>
+        <input id="vacancy_rate" type="number" step="any" value = 0.1449 required>
+        <label for="maintenance_cost_pct">Maintenance Cost (0-1):</label>
+        <input id="maintenance_cost_pct" type="number" step="any" value = 0.0156 required>
         <button type="submit">Predict</button>
     </form>
+
+    <!-- <form id="prediction-form">
+        <label for="return_rate">Return Rate (0-1):</label>
+        <input id="return_rate" type="number" step="any" value=0.1683 required>
+        <label for="years_held">Years Held:</label>
+        <input id="years_held" type="number" value=16 required>
+        <label for="has_history">Has History (0/1):</label>
+        <input id="has_history" type="number" value=1 required>
+        <label for="location_score">Location Score (0-1):</label>
+        <input id="location_score" type="number" step="any" value=0.739 required>
+        <label for="vacancy_rate">Vacancy Rate (0-1):</label>
+        <input id="vacancy_rate" type="number" step="any" value=0.0526 required>
+        <label for="maintenance_cost_pct">Maintenance Cost (0-1):</label>
+        <input id="maintenance_cost_pct" type="number" step="any" value=0.0856 required>
+        <button type="submit">Predict</button>
+    </form> -->
 
     <div id="result"></div>
 
